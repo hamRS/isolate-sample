@@ -1,21 +1,21 @@
+import 'package:isolate_test/feature/isolate/domain/entities/product_entity.dart';
 // ignore: depend_on_referenced_packages
 import 'package:json_annotation/json_annotation.dart';
-
 part 'product_response_model.g.dart';
 
 @JsonSerializable()
 class ProductResponseModel {
-  int id;
-  String title;
-  String description;
-  int price;
-  double discountPercentage;
-  double rating;
-  int stock;
-  String brand;
-  String category;
-  String thumbnail;
-  List<String> images;
+  final int id;
+  final String title;
+  final String description;
+  final int price;
+  final double discountPercentage;
+  final double rating;
+  final int stock;
+  final String brand;
+  final String category;
+  final String thumbnail;
+  final List<String> images;
 
   ProductResponseModel({
     required this.id,
@@ -38,4 +38,26 @@ class ProductResponseModel {
 
   /// Connect the generated [_$ProductResponseModelToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$ProductResponseModelToJson(this);
+
+  List<ProductResponseModel> fromListJson(List<dynamic> json) {
+    return json
+        .map((product) => ProductResponseModel.fromJson(product))
+        .toList();
+  }
+
+  ProductEntity toEntity() {
+    return ProductEntity(
+      id: id,
+      title: title,
+      description: description,
+      price: price,
+      discountPercentage: discountPercentage,
+      rating: rating,
+      stock: stock,
+      brand: brand,
+      category: category,
+      thumbnail: thumbnail,
+      images: images,
+    );
+  }
 }
